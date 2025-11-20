@@ -1,0 +1,935 @@
+{% extends 'index.html' %}
+
+{% block title %}Registros Contables{% endblock %}
+
+{% block content %}
+
+<div class="w-full relative">
+    <nav class="flex mt-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center">
+            <li class="inline-flex items-center">
+                <a href="{% url 'home' %}"
+                    class="group inline-flex items-center text-base font-medium text-gray-900 hover:text-indigo-800 whitespace-nowrap">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-1 h-5 mx-5" viewBox="0 0 5 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.12561 1.13672L0.999943 18.8633" stroke="#E5E7EB" stroke-width="1.6"
+                            stroke-linecap="round"></path>
+                        <a href="{% url 'home' %}" class="cursor-pointer">
+                            <span class="text-base font-medium text-gray-400 whitespace-nowrap cursor-pointer">
+                                Registros Contables</span>
+                        </a>
+                    </svg>
+                </div>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-1 h-5 mx-5" viewBox="0 0 5 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.12561 1.13672L0.999943 18.8633" stroke="#E5E7EB" stroke-width="1.6"
+                            stroke-linecap="round"></path>
+                    </svg>
+                </div>
+            </li>
+        </ol>
+    </nav>
+</div>
+<div class="mt-5">
+    <h2 class="font-semibold text-xl text-gray-600">Registros Contables</h2>
+    <p class="text-gray-500 mb-6">Tabla de registros contables</p>
+
+    <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
+
+            <div class="lg:col-span-5">
+                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                    <div class="md:col-span-5 flex justify-start">
+                        <h2 class="text-lg font-semibold text-gray-800 dark:text-neutral-200 text-center">
+                            Registros
+                        </h2>
+                    </div>
+                    <div class="md:col-span-5 flex justify-start">
+
+
+                        <div class="border-b border-gray-200 dark:border-gray-700">
+                            <ul
+                                class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+                                <li class="me-2">
+                                    <a href="#" id="libroDiarioTab"
+                                        class="inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
+                                        aria-current="page">
+                                        <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                        viewBox="0 0 18 18">
+                                            <path fill-rule="evenodd" d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z" clip-rule="evenodd"/>
+                                          </svg>
+                                          
+                                          Libro Diario
+                                    </a>
+                                </li>
+                                <li class="me-2">
+                                    <a href="#" id="estadoResultadoTab"
+                                        class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                                        <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                        viewBox="0 0 18 18">
+                                            <path fill-rule="evenodd" d="M9 7V2.221a2 2 0 0 0-.5.365L4.586 6.5a2 2 0 0 0-.365.5H9Zm2 0V2h7a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Zm-1 9a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Zm2-5a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1Zm4 4a1 1 0 1 0-2 0v3a1 1 0 1 0 2 0v-3Z" clip-rule="evenodd"/>
+                                          </svg>
+                                          Estado de Resultado
+                                    </a>
+                                </li>
+                                <li class="me-2">
+                                    <a href="#" id="estadoFinancieroTab"
+                                        class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                                        <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                        viewBox="0 0 18 18">
+                                            <path fill-rule="evenodd" d="M9 15a6 6 0 1 1 12 0 6 6 0 0 1-12 0Zm3.845-1.855a2.4 2.4 0 0 1 1.2-1.226 1 1 0 0 1 1.992-.026c.426.15.809.408 1.111.749a1 1 0 1 1-1.496 1.327.682.682 0 0 0-.36-.213.997.997 0 0 1-.113-.032.4.4 0 0 0-.394.074.93.93 0 0 0 .455.254 2.914 2.914 0 0 1 1.504.9c.373.433.669 1.092.464 1.823a.996.996 0 0 1-.046.129c-.226.519-.627.94-1.132 1.192a1 1 0 0 1-1.956.093 2.68 2.68 0 0 1-1.227-.798 1 1 0 1 1 1.506-1.315.682.682 0 0 0 .363.216c.038.009.075.02.111.032a.4.4 0 0 0 .395-.074.93.93 0 0 0-.455-.254 2.91 2.91 0 0 1-1.503-.9c-.375-.433-.666-1.089-.466-1.817a.994.994 0 0 1 .047-.134Zm1.884.573.003.008c-.003-.005-.003-.008-.003-.008Zm.55 2.613s-.002-.002-.003-.007a.032.032 0 0 1 .003.007ZM4 14a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Zm3-2a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1Zm6.5-8a1 1 0 0 1 1-1H18a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-.796l-2.341 2.049a1 1 0 0 1-1.24.06l-2.894-2.066L6.614 9.29a1 1 0 1 1-1.228-1.578l4.5-3.5a1 1 0 0 1 1.195-.025l2.856 2.04L15.34 5h-.84a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
+                                          </svg>
+                                          Estado Financiero
+                                    </a>
+                                </li>
+                                <li class="me-2">
+                                    <a href="#" id="mayoresTab"
+                                        class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                                        <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                            viewBox="0 0 18 20">
+                                            <path
+                                                d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
+                                        </svg>Mayores
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- Tablas de contenido -->
+                    <div id="libroDiarioContent" class="mt-4 flex flex-col md:col-span-5">
+                        <div class="-m-1.5 overflow-x-auto">
+                            <div class="p-1.5 min-w-full inline-block align-middle">
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                    Fecha</th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                    Cuenta</th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                    Tipo Cuenta</th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                    Glose</th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                    Debe</th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                    Haber</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                                            {% if libro_diario %}
+                                                {% for asiento in libro_diario %}
+                                                <tr>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                                        {{ asiento.0|date:"d/m/Y" }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                                        {% for codigo, nombre in cuentas_dict %}
+                                                            {% if codigo == asiento.1 %}
+                                                                {{ nombre }}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                                        {{ asiento.2 }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                                        {% if asiento.3 and asiento.3 != 'undefined' and asiento.3 != 'none' %}
+                                                            {{ asiento.3 }}
+                                                        {% endif %}
+                                                    </td>
+                                                    {% if asiento.4 == 'D' %}
+                                                    <td class="bg-blue-100 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-800">
+                                                        S/ {{ asiento.5 }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                                    </td>
+                                                    {% else %}
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                                    </td>
+                                                    <td class="bg-orange-100 px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-800">
+                                                        S/ {{ asiento.5 }}
+                                                    </td>
+                                                    {% endif %}
+                                                </tr>
+                                                {% endfor %}
+                                            {% else %}
+                                                <tr>
+                                                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+                                                        No hay datos registrados en el libro diario
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="estadoResultadoContent" class="mt-4 hidden flex flex-col md:col-span-5">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                            <thead>
+                                <tr>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                        Concepto</th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                        Monto (S/.)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        + Ventas</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.ventas|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        - Costo de Ventas</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.costo_ventas|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                        = Utilidad Bruta</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.utilidad_bruta|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        - Gastos Administrativos</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.gastos_administrativos|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        - Gastos de Ventas</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.gastos_ventas|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                        = Utilidad de Operación</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.utilidad_operacion|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        + Otros Ingresos</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.otros_ingresos|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        + Ingresos Financieros</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.ingresos_financieros|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        - Otros Gastos</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.otros_gastos|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        - Gastos Financieros</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.gastos_financieros|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                        = Utilidad Antes de Impuestos</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.utilidad_antes_impuestos|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        - Impuesto a la Renta</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.impuesto_renta|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                        = Utilidad Neta</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                        S/ {{ estado_resultados.utilidad_neta|floatformat:2 }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="estadoFinancieroContent" class="mt-4 hidden flex flex-col md:col-span-5">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Activos</th>
+                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Monto (S/.)</th>
+                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Pasivos y Patrimonio</th>
+                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Monto (S/.)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                                    <!-- Activos Corrientes -->
+                                    <tr>
+                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            ACTIVOS CORRIENTES</td>
+                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            PASIVOS CORRIENTES</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Efectivo y Equivalentes de Efectivo</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.10|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Tributos y Aportes al Sistema de Pensiones y de Salud por Pagar</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.40|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Inversiones Financieras</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.11|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Remuneraciones y Participaciones por Pagar</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.41|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Cobrar Comerciales Terceros</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.12|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Pagar Comerciales Terceros</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.42|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Cobrar Comerciales Relacionadas</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.13|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Pagar Comerciales Relacionadas</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.43|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Cobrar al Personal, a los Accionistas</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.14|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Pagar a los Accionistas, Directores y Gerentes</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.44|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Cobrar Diversas Terceros</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.16|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Pagar Diversas Terceros</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.46|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Cobrar Diversas Relacionadas</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.17|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Cuentas por Pagar Diversas Relacionadas</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.47|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Servicios y Otros Contratados por Anticipado</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.18|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Provisiones</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.48|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Mercaderías</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.20|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            Total Pasivos Corrientes</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.total_pasivo_corriente|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Productos Terminados</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.21|default:0|floatformat:2 }}</td>
+                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            PASIVOS NO CORRIENTES</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Subproductos, Desechos y Desperdicios</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.22|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Obligaciones Financieras</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.45|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Productos en Proceso</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.23|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Pasivo Diferido</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.49|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Materias Primas</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.24|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            Total Pasivos No Corrientes</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.total_pasivo_no_corriente|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Materiales Auxiliares, Suministros y Repuesto</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.25|default:0|floatformat:2 }}</td>
+                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            PATRIMONIO</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Envases y Embalajes</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.26|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Capital</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.50|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Activos No Corrientes Mantenidos para la Venta</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.27|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Acciones de Inversión</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.51|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Existencias por Recibir</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.28|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Capital Adicional</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.52|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Desvalorización de existencias</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.29|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Resultados no realizados</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.56|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            Total Activos Corrientes</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.total_activo_corriente|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Excedente de revaluación</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.57|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            ACTIVOS NO CORRIENTES</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Reservas</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.58|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Inversiones Mobiliarias</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.30|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            Total Patrimonio</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.total_patrimonio|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Inversiones Inmobiliarias</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.31|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Activos Adquiridos en Arrendamiento Financiero</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.32|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Inmuebles, Maquinaria y Equipo</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.33|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Intangibles</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.34|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Activos Biológicos</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.35|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Desvalorización de Activo Inmovilizado</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.36|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Activo Diferido</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.37|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Otros Activos</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.38|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            Depreciación, Amortización y Agotamiento Acumulados</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.valores_cuentas.39|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            Total Activos No Corrientes</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.total_activo_no_corriente|default:0|floatformat:2 }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            TOTAL ACTIVOS</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.total_activo|default:0|floatformat:2 }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            TOTAL PASIVOS Y PATRIMONIOS</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                            S/ {{ estado_situacion_financiera.total_pasivo_patrimonio|default:0|floatformat:2 }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="mayoresContent" class="mt-4 hidden flex flex-col md:col-span-5">
+                        <!-- Filtros de Mayores -->
+                        <div class="mb-4 flex items-center space-x-4">
+                            <div class="flex items-center">
+                                <input id="tipoCuentaRadio" type="radio" name="filtroMayores" value="tipo" checked
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="tipoCuentaRadio"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Por Tipo de Cuenta
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="cuentaEspecificaRadio" type="radio" name="filtroMayores" value="cuenta"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="cuentaEspecificaRadio"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Por Cuenta Específica
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Selector de Tipo de Cuenta -->
+                        <div id="tipoCuentaSelector" class="mb-4">
+                            <select id="tipoCuentaSelect"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                {% for codigo, nombre in tipo_cuenta %}
+                                    <option value="{{ codigo }}" {% if forloop.first %}selected{% endif %}>{{ nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Selector de Cuenta Específica -->
+                        <div id="cuentaEspecificaSelector" class="mb-4 hidden">
+                            <select id="cuentaEspecificaSelect"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                {% for codigo, nombre in cuentas_dict %}
+                                    <option value="{{ codigo }}">{{ nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Tabla de Mayores -->
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Fecha</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Debe</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Haber</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700" id="mayoresTableBody">
+                                    {% for mayor in resultados_mayores %}
+                                        {% for fecha, debe, haber in mayor.fechas_debe_haber %}
+                                        <tr class="mayor-row" data-tipo-cuenta="{{ mayor.tipo_cuenta }}" data-cuenta="{{ mayor.cuenta }}">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                                {{ fecha|date:"d/m/Y" }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm ${debe > 0 ? 'bg-blue-100 font-medium text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                                                S/ {{ debe|floatformat:2 }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm ${haber > 0 ? 'bg-orange-100 font-medium text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                                                S/ {{ haber|floatformat:2 }}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tr class="mayor-row total-row" data-tipo-cuenta="{{ mayor.tipo_cuenta }}" data-cuenta="{{ mayor.cuenta }}">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                                Total
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold ${mayor.total_debe > 0 ? 'bg-blue-100 text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                                                S/ {{ mayor.total_debe|floatformat:2 }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold ${mayor.total_haber > 0 ? 'bg-orange-100 text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                                                S/ {{ mayor.total_haber|floatformat:2 }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = {
+            libroDiario: document.getElementById('libroDiarioTab'),
+            estadoResultado: document.getElementById('estadoResultadoTab'),
+            estadoFinanciero: document.getElementById('estadoFinancieroTab'),
+            mayores: document.getElementById('mayoresTab')
+        };
+
+        const contents = {
+            libroDiario: document.getElementById('libroDiarioContent'),
+            estadoResultado: document.getElementById('estadoResultadoContent'),
+            estadoFinanciero: document.getElementById('estadoFinancieroContent'),
+            mayores: document.getElementById('mayoresContent')
+        };
+
+        function switchTab(selectedTab) {
+            // Resetear todos los tabs
+            Object.values(tabs).forEach(tab => {
+                tab.classList.remove('text-blue-600', 'border-blue-600', 'dark:text-blue-500', 'dark:border-blue-500');
+                tab.classList.add('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300', 'dark:hover:text-gray-300');
+                tab.querySelector('svg').classList.remove('text-blue-600', 'dark:text-blue-500');
+                tab.querySelector('svg').classList.add('text-gray-400', 'group-hover:text-gray-500', 'dark:text-gray-500', 'dark:group-hover:text-gray-300');
+            });
+
+            // Ocultar todos los contenidos
+            Object.values(contents).forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Activar el tab seleccionado
+            selectedTab.classList.remove('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300', 'dark:hover:text-gray-300');
+            selectedTab.classList.add('text-blue-600', 'border-blue-600', 'dark:text-blue-500', 'dark:border-blue-500');
+            selectedTab.querySelector('svg').classList.remove('text-gray-400', 'group-hover:text-gray-500', 'dark:text-gray-500', 'dark:group-hover:text-gray-300');
+            selectedTab.querySelector('svg').classList.add('text-blue-600', 'dark:text-blue-500');
+
+            // Mostrar el contenido correspondiente
+            const contentId = selectedTab.id.replace('Tab', 'Content');
+            const content = document.getElementById(contentId);
+            content.classList.remove('hidden');
+
+            // Si el tab seleccionado es Mayores, actualizar la tabla
+            if (selectedTab.id === 'mayoresTab') {
+                actualizarTabla();
+            }
+        }
+
+        // Agregar event listeners a los tabs
+        Object.values(tabs).forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab(tab);
+            });
+        });
+
+        // Activar el tab de Libro Diario por defecto
+        switchTab(tabs.libroDiario);
+
+        // Event listeners para los filtros de Mayores
+        const tipoCuentaRadio = document.getElementById('tipoCuentaRadio');
+        const cuentaEspecificaRadio = document.getElementById('cuentaEspecificaRadio');
+        const tipoCuentaSelector = document.getElementById('tipoCuentaSelector');
+        const cuentaEspecificaSelector = document.getElementById('cuentaEspecificaSelector');
+        const tipoCuentaSelect = document.getElementById('tipoCuentaSelect');
+        const cuentaEspecificaSelect = document.getElementById('cuentaEspecificaSelect');
+        const mayoresTableBody = document.getElementById('mayoresTableBody');
+
+        // Verificar el estado guardado o usar el valor por defecto
+        const filtroGuardado = localStorage.getItem('filtroMayores') || 'tipo';
+        if (filtroGuardado === 'tipo') {
+            tipoCuentaRadio.checked = true;
+            tipoCuentaSelector.classList.remove('hidden');
+            cuentaEspecificaSelector.classList.add('hidden');
+        } else {
+            cuentaEspecificaRadio.checked = true;
+            tipoCuentaSelector.classList.add('hidden');
+            cuentaEspecificaSelector.classList.remove('hidden');
+        }
+
+        // Guardar el estado cuando cambia el filtro
+        tipoCuentaRadio.addEventListener('change', function() {
+            localStorage.setItem('filtroMayores', 'tipo');
+            tipoCuentaSelector.classList.remove('hidden');
+            cuentaEspecificaSelector.classList.add('hidden');
+            actualizarTabla();
+        });
+
+        cuentaEspecificaRadio.addEventListener('change', function() {
+            localStorage.setItem('filtroMayores', 'cuenta');
+            tipoCuentaSelector.classList.add('hidden');
+            cuentaEspecificaSelector.classList.remove('hidden');
+            actualizarTabla();
+        });
+
+        // Datos de Django
+        const datosMayores = JSON.parse('{{ resultados_mayores_json|escapejs }}');
+        const datosMayoresCE = JSON.parse('{{ resultados_mayores_ce_json|escapejs }}');
+
+        function actualizarTabla() {
+            // Limpiar la tabla
+            mayoresTableBody.innerHTML = '';
+            
+            const tipoSeleccionado = tipoCuentaRadio.checked ? 'tipo' : 'cuenta';
+            const valorSeleccionado = tipoSeleccionado === 'tipo' ? tipoCuentaSelect.value : cuentaEspecificaSelect.value;
+
+            if (tipoSeleccionado === 'tipo') {
+                
+                const datosFiltrados = datosMayoresCE.filter(mayor => mayor.tipo_cuenta === valorSeleccionado);
+
+                if (datosFiltrados.length > 0) {
+                    const mayor = datosFiltrados[0];
+                    // Mostrar las fechas_debe_haber
+                    mayor.fechas_debe_haber.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                ${item.fecha}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${parseFloat(item.debe) > 0 ? 'bg-blue-100 font-medium text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                                S/ ${parseFloat(item.debe).toFixed(2)}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${parseFloat(item.haber) > 0 ? 'bg-orange-100 font-medium text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                                S/ ${parseFloat(item.haber).toFixed(2)}
+                            </td>
+                        `;
+                        mayoresTableBody.appendChild(tr);
+                    });
+
+                    // Agregar fila de totales
+                    const trTotal = document.createElement('tr');
+                    trTotal.classList.add('total-row');
+                    trTotal.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                            Total
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold ${parseFloat(mayor.total_debe) > 0 ? 'bg-blue-100 text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                            S/ ${parseFloat(mayor.total_debe).toFixed(2)}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold ${parseFloat(mayor.total_haber) > 0 ? 'bg-orange-100 text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                            S/ ${parseFloat(mayor.total_haber).toFixed(2)}
+                        </td>
+                    `;
+                    mayoresTableBody.appendChild(trTotal);
+                }
+            } else {
+                
+                const textoSeleccionado = cuentaEspecificaSelect.options[cuentaEspecificaSelect.selectedIndex].text;
+                
+                const datosFiltrados = datosMayores.filter(mayor => mayor.cuenta === textoSeleccionado);
+
+                if (datosFiltrados.length > 0) {
+                    const mayor = datosFiltrados[0];
+                    // Mostrar las fechas_debe_haber
+                    mayor.fechas_debe_haber.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                ${item.fecha}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${parseFloat(item.debe) > 0 ? 'bg-blue-100 font-medium text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                                S/ ${parseFloat(item.debe).toFixed(2)}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${parseFloat(item.haber) > 0 ? 'bg-orange-100 font-medium text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                                S/ ${parseFloat(item.haber).toFixed(2)}
+                            </td>
+                        `;
+                        mayoresTableBody.appendChild(tr);
+                    });
+
+                    // Agregar fila de totales
+                    const trTotal = document.createElement('tr');
+                    trTotal.classList.add('total-row');
+                    trTotal.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                            Total
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold ${parseFloat(mayor.total_debe) > 0 ? 'bg-blue-100 text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                            S/ ${parseFloat(mayor.total_debe).toFixed(2)}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold ${parseFloat(mayor.total_haber) > 0 ? 'bg-orange-100 text-gray-800 dark:text-neutral-800' : 'text-gray-800 dark:text-neutral-200'}">
+                            S/ ${parseFloat(mayor.total_haber).toFixed(2)}
+                        </td>
+                    `;
+                    mayoresTableBody.appendChild(trTotal);
+
+                    // Agregar fila de saldo final solo para cuenta específica
+                    if (tipoSeleccionado === 'cuenta') {
+                        const saldoFinal = parseFloat(mayor.total_debe) - parseFloat(mayor.total_haber);
+                        const trSaldoFinal = document.createElement('tr');
+                        trSaldoFinal.classList.add('saldo-final-row');
+                        trSaldoFinal.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                Saldo Final
+                            </td>
+                            <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 dark:text-neutral-200">
+                                S/ ${saldoFinal.toFixed(2)}
+                            </td>
+                        `;
+                        mayoresTableBody.appendChild(trSaldoFinal);
+                    }
+                }
+            }
+
+            // Mostrar mensaje si no hay resultados
+            if (mayoresTableBody.children.length === 0) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500">
+                        No hay datos disponibles para el filtro seleccionado
+                    </td>
+                `;
+                mayoresTableBody.appendChild(tr);
+            }
+        }
+
+        tipoCuentaSelect.addEventListener('change', function() {
+            actualizarTabla();
+        });
+
+        cuentaEspecificaSelect.addEventListener('change', function() {
+            actualizarTabla();
+        });
+
+        // Actualizar inicialmente
+        actualizarTabla();
+    });
+</script>
+{% endblock %}

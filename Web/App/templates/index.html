@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de contabilidad - Universidad Nacional de Ingeniería">
+    <meta name="keywords" content="contabilidad, finanzas, UNI, sistema contable">
+    <title>{% block title %}Contabilidad{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-gray-50">
+
+    {% include 'navbar.html' %}
+
+    <main class="flex-grow container mx-auto px-4 py-8 mt-10">
+        <div class="container max-w-screen-xl mx-auto">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    {% include 'footer.html' %}
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</html>

@@ -1,0 +1,908 @@
+{% extends 'index.html' %}
+
+{% block title %}Registrar Transacción{% endblock %}
+
+{% block content %}
+
+<div class="w-full relative">
+    <nav class="flex mt-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center ">
+            <li class="inline-flex items-center">
+                <a href="javascript:;"
+                    class="group inline-flex items-center text-base font-medium text-gray-900  hover:text-indigo-800 whitespace-nowrap">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class=" w-1 h-5 mx-5" viewBox="0 0 5 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.12561 1.13672L0.999943 18.8633" stroke="#E5E7EB" stroke-width="1.6"
+                            stroke-linecap="round"></path>
+                    </svg>
+                </div>
+            </li>
+        </ol>
+    </nav>
+</div>
+<div class="mt-5">
+    <h2 class="font-semibold text-xl text-gray-600">Registro Contable</h2>
+    <p class="text-gray-500 mb-6">Formulario para registrar transacciones contables.</p>
+
+    <form method="post" class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+        {% csrf_token %}
+        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+            <div
+                class="w-80 flex flex-col bg-white border border-gray-200 shadow-lg rounded-xl overflow-hidden dark:bg-neutral-900 dark:border-neutral-700 mx-auto">
+                <!-- Calendar -->
+                <div class="p-3 space-y-0.5">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200 mb-2 text-center">Registro de
+                        Fecha</h3>
+                    <!-- Months -->
+                    <div class="grid grid-cols-5 items-center gap-x-3 mx-1.5 pb-3">
+                        <!-- Prev Button -->
+                        <div class="col-span-1">
+                            <button type="button" id="prevMonth"
+                                class="size-8 flex justify-center items-center text-gray-800 hover:bg-gray-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                                aria-label="Previous">
+                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="m15 18-6-6 6-6" />
+                                </svg>
+                            </button>
+                        </div>
+                        <!-- End Prev Button -->
+
+                        <!-- Month / Year -->
+                        <div class="col-span-3 flex justify-center items-center gap-x-1">
+                            <div class="relative">
+                                <button id="monthDropdownButton" data-dropdown-toggle="monthDropdown"
+                                    class="text-gray-800 bg-white hover:bg-gray-100 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center inline-flex items-center dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:ring-neutral-600"
+                                    type="button">
+                                    <span id="monthDisplay">Enero</span>
+                                    <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 4 4 4-4" />
+                                    </svg>
+                                </button>
+
+                                <div id="monthDropdown"
+                                    class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-32 dark:bg-neutral-900 max-h-48 overflow-y-auto">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-neutral-200"
+                                        aria-labelledby="monthDropdownButton">
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="0">Enero</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="1">Febrero</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="2">Marzo</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="3">Abril</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="4">Mayo</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="5">Junio</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="6">Julio</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="7">Agosto</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="8">Septiembre</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="9">Octubre</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="10">Noviembre</a></li>
+                                        <li><a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                                                data-value="11">Diciembre</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <span class="text-gray-800 dark:text-neutral-200">/</span>
+
+                            <div class="relative">
+                                <button id="yearDropdownButton" data-dropdown-toggle="yearDropdown"
+                                    class="text-gray-800 bg-white hover:bg-gray-100 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center inline-flex items-center dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:ring-neutral-600"
+                                    type="button">
+                                    <span id="yearDisplay">2024</span>
+                                    <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 4 4 4-4" />
+                                    </svg>
+                                </button>
+
+                                <div id="yearDropdown"
+                                    class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-24 dark:bg-neutral-900 max-h-48 overflow-y-auto">
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-neutral-200"
+                                        aria-labelledby="yearDropdownButton">
+                                        <!-- Los años se agregarán dinámicamente con JavaScript -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Month / Year -->
+
+                        <!-- Next Button -->
+                        <div class="col-span-1 flex justify-end">
+                            <button type="button" id="nextMonth"
+                                class="size-8 flex justify-center items-center text-gray-800 hover:bg-gray-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                                aria-label="Next">
+                                <svg class="shrink-0 size-4" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
+                            </button>
+                        </div>
+                        <!-- End Next Button -->
+                    </div>
+                    <!-- Months -->
+
+                    <!-- Weeks -->
+                    <div class="flex pb-1.5">
+                        <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
+                            Mo
+                        </span>
+                        <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
+                            Tu
+                        </span>
+                        <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
+                            We
+                        </span>
+                        <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
+                            Th
+                        </span>
+                        <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
+                            Fr
+                        </span>
+                        <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
+                            Sa
+                        </span>
+                        <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
+                            Su
+                        </span>
+                    </div>
+                    <!-- Weeks -->
+
+                    <!-- Days -->
+                    <div id="calendarDays" class="space-y-1">
+                        <!-- Los días se generarán dinámicamente aquí -->
+                    </div>
+                    <!-- Days -->
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                    <div class="md:col-span-5">
+                        <label for="cuenta">Cuenta</label>
+                        <div class="relative">
+                            <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                <input type="text" id="cuentaSearch" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" placeholder="Buscar cuenta..." />
+                                <button type="button" id="clearSearch" class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
+                                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                                <button type="button" id="toggleDropdown" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 9l6 6 6-6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="cuentaDropdown" class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-neutral-200">
+                                    {% for value, label in cuentas_dict %}
+                                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="{{ value }}">
+                                        <a href="#" class="block">{{ label }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <input type="hidden" name="cuenta" id="cuenta" value="">
+                            <div id="cuentaError" class="text-red-500 text-xs mt-1 hidden">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="tipo_cuenta">Tipo de Cuenta</label>
+                        <div class="relative">
+                            <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                <input type="text" id="tipoCuentaSearch" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" placeholder="Buscar tipo de cuenta..." />
+                                <button type="button" id="clearTipoCuentaSearch" class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
+                                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                                <button type="button" id="toggleTipoCuentaDropdown" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 9l6 6 6-6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="tipoCuentaDropdown" class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-neutral-200">
+                                    {% for value, label in tipo_cuenta %}
+                                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="{{ value }}">
+                                        <a href="#" class="block">{{ label }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <input type="hidden" name="tipo_cuenta" id="tipo_cuenta" value="">
+                            <div id="tipoCuentaError" class="text-red-500 text-xs mt-1 hidden">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="tipo_monto">Tipo de Monto</label>
+                        <div class="relative">
+                            <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                <input type="text" id="tipoMontoSearch" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" placeholder="Buscar tipo de monto..." />
+                                <button type="button" id="clearTipoMontoSearch" class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
+                                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                                <button type="button" id="toggleTipoMontoDropdown" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                    <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 9l6 6 6-6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="tipoMontoDropdown" class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-neutral-200">
+                                    {% for value, label in form.tipo_monto.field.choices %}
+                                    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="{{ value }}">
+                                        <a href="#" class="block">{{ label }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <input type="hidden" name="tipo_monto" id="tipo_monto" value="">
+                            <div id="tipoMontoError" class="text-red-500 text-xs mt-1 hidden">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-1">
+                        <label for="monto">Monto</label>
+                        <div class="relative mt-1">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">S/.</span>
+                            <input type="text" name="monto" id="monto" class="transition-all flex items-center h-10 border rounded pl-10 pr-4 w-full bg-gray-50" placeholder="0.00" value="" />
+                            <div id="montoError" class="text-red-500 text-xs mt-1 hidden">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-5">
+                        <label for="glose" class="block mb-2">Glose</label>
+                        <textarea name="glose" id="glose" maxlength="100" class="min-h-[120px] border mt-1 rounded px-4 py-2 w-full bg-gray-50 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ingrese la descripción de la transacción..."></textarea>
+                        <div class="flex justify-between items-center mt-1 relative">
+                            <span class="text-xs text-red-500 hidden" id="maxLengthMessage">Has alcanzado el límite de caracteres</span>
+                            <span class="text-xs text-gray-500 ml-auto">
+                                <span id="gloseCount">0</span>/100 caracteres
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-5 text-right">
+                        <div class="inline-flex items-end">
+                            <button type="button" id="submitForm" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    
+    // Variables y funciones auxiliares
+    const form = document.querySelector('form');
+    if (!form) {
+        return;
+    }
+
+    const cuentaSearch = document.getElementById('cuentaSearch');
+    const toggleDropdown = document.getElementById('toggleDropdown');
+    const clearSearch = document.getElementById('clearSearch');
+    const cuentaDropdown = document.getElementById('cuentaDropdown');
+    const tipoMontoSearch = document.getElementById('tipoMontoSearch');
+    const toggleTipoMontoDropdown = document.getElementById('toggleTipoMontoDropdown');
+    const clearTipoMontoSearch = document.getElementById('clearTipoMontoSearch');
+    const tipoMontoDropdown = document.getElementById('tipoMontoDropdown');
+    const tipoCuentaSearch = document.getElementById('tipoCuentaSearch');
+    const toggleTipoCuentaDropdown = document.getElementById('toggleTipoCuentaDropdown');
+    const clearTipoCuentaSearch = document.getElementById('clearTipoCuentaSearch');
+    const tipoCuentaDropdown = document.getElementById('tipoCuentaDropdown');
+    const glosaTextarea = document.getElementById('glose');
+    const glosaCount = document.getElementById('gloseCount');
+    const maxLengthMessage = document.getElementById('maxLengthMessage');
+    const montoInput = document.getElementById('monto');
+    const submitButton = document.getElementById('submitForm');
+
+    function toggleDropdownVisibility(dropdown, searchInput, clearButton) {
+        dropdown.classList.toggle('hidden');
+        if (!dropdown.classList.contains('hidden')) {
+            searchInput.focus();
+        }
+    }
+
+    function filterOptions(searchInput, dropdown) {
+        const searchTerm = searchInput.value.toLowerCase();
+        const options = dropdown.querySelectorAll('li');
+        
+        options.forEach(option => {
+            const text = option.textContent.trim().toLowerCase();
+            if (text.includes(searchTerm)) {
+                option.style.display = 'block';
+            } else {
+                option.style.display = 'none';
+            }
+        });
+    }
+
+    function selectOption(option, searchInput, dropdown, hiddenInput) {
+        const value = option.dataset.value;
+        const text = option.textContent.trim();
+        
+        searchInput.value = text;
+        hiddenInput.value = value;
+        dropdown.classList.add('hidden');
+        
+        hideError(searchInput.parentElement, document.querySelector(`label[for="${hiddenInput.name}"]`));
+    }
+
+    if (cuentaSearch) {
+        cuentaSearch.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            cuentaDropdown.classList.remove('hidden');
+        });
+
+        cuentaSearch.addEventListener('input', () => {
+            cuentaDropdown.classList.remove('hidden');
+            filterOptions(cuentaSearch, cuentaDropdown);
+        });
+    }
+
+    if (toggleDropdown) {
+        toggleDropdown.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleDropdownVisibility(cuentaDropdown, cuentaSearch, clearSearch);
+        });
+    }
+
+    if (clearSearch) {
+        clearSearch.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            cuentaSearch.value = '';
+            form.querySelector('input[name="cuenta"]').value = '';
+            filterOptions(cuentaSearch, cuentaDropdown);
+        });
+    }
+
+    const cuentaOptions = document.querySelectorAll('#cuentaDropdown li');
+    cuentaOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            selectOption(option, cuentaSearch, cuentaDropdown, form.querySelector('input[name="cuenta"]'));
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!cuentaDropdown.contains(e.target) && !cuentaSearch.contains(e.target) && !toggleDropdown.contains(e.target)) {
+            cuentaDropdown.classList.add('hidden');
+        }
+        if (!tipoCuentaDropdown.contains(e.target) && !tipoCuentaSearch.contains(e.target) && !toggleTipoCuentaDropdown.contains(e.target)) {
+            tipoCuentaDropdown.classList.add('hidden');
+        }
+        if (!tipoMontoDropdown.contains(e.target) && !tipoMontoSearch.contains(e.target) && !toggleTipoMontoDropdown.contains(e.target)) {
+            tipoMontoDropdown.classList.add('hidden');
+        }
+    });
+
+    function showError(element, label) {
+        element.classList.add('error');
+        if (label) {
+            label.classList.add('error-label');
+        }
+    }
+
+    function hideError(element, label) {
+        element.classList.remove('error');
+        if (label) {
+            label.classList.remove('error-label');
+        }
+    }
+
+    function updateFormValue(fieldName, value) {
+        const hiddenInput = form.querySelector(`input[name="${fieldName}"]`);
+        if (hiddenInput) {
+            hiddenInput.value = value;
+        }
+    }
+
+    if (montoInput) {
+        montoInput.addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9.]/g, '');
+            
+            if ((this.value.match(/\./g) || []).length > 1) {
+                this.value = this.value.slice(0, -1);
+            }
+            
+            if (this.value.includes('.')) {
+                const parts = this.value.split('.');
+                if (parts[1].length > 2) {
+                    this.value = parts[0] + '.' + parts[1].slice(0, 2);
+                }
+            }
+
+            if (this.value && !isNaN(this.value)) {
+                hideError(this, document.querySelector('label[for="monto"]'));
+            }
+        });
+
+        montoInput.addEventListener('blur', function() {
+            if (this.value && !isNaN(this.value)) {
+                this.value = parseFloat(this.value).toFixed(2);
+                hideError(this, document.querySelector('label[for="monto"]'));
+            }
+        });
+    }
+
+    function validateForm() {
+        const cuentaValue = form.querySelector('input[name="cuenta"]')?.value;
+        const tipoCuentaValue = form.querySelector('input[name="tipo_cuenta"]')?.value;
+        const tipoMontoValue = form.querySelector('input[name="tipo_monto"]')?.value;
+        const montoValue = document.getElementById('monto')?.value;
+        const fechaValue = form.querySelector('input[name="fecha"]')?.value;
+        const glosaValue = document.getElementById('glose')?.value;
+
+        let isValid = true;
+
+        if (!cuentaValue) {
+            showError(cuentaSearch.parentElement, document.querySelector('label[for="cuenta"]'));
+            isValid = false;
+        }
+        if (!tipoCuentaValue) {
+            showError(tipoCuentaSearch.parentElement, document.querySelector('label[for="tipo_cuenta"]'));
+            isValid = false;
+        }
+        if (!tipoMontoValue) {
+            showError(tipoMontoSearch.parentElement, document.querySelector('label[for="tipo_monto"]'));
+            isValid = false;
+        }
+        if (!montoValue || isNaN(montoValue) || parseFloat(montoValue) <= 0) {
+            showError(montoInput, document.querySelector('label[for="monto"]'));
+            isValid = false;
+        }
+        if (!fechaValue) {
+            const calendarTitle = document.querySelector('.text-lg.font-semibold');
+            if (calendarTitle) {
+                showError(calendarTitle, null);
+            }
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    if (submitButton) {
+        submitButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (validateForm()) {
+                form.submit();
+            }
+        });
+    }
+
+    if (tipoCuentaSearch) {
+        tipoCuentaSearch.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            tipoCuentaDropdown.classList.remove('hidden');
+        });
+
+        tipoCuentaSearch.addEventListener('input', () => {
+            tipoCuentaDropdown.classList.remove('hidden');
+            filterOptions(tipoCuentaSearch, tipoCuentaDropdown);
+        });
+    }
+
+    if (toggleTipoCuentaDropdown) {
+        toggleTipoCuentaDropdown.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleDropdownVisibility(tipoCuentaDropdown, tipoCuentaSearch, clearTipoCuentaSearch);
+        });
+    }
+
+    if (clearTipoCuentaSearch) {
+        clearTipoCuentaSearch.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            tipoCuentaSearch.value = '';
+            form.querySelector('input[name="tipo_cuenta"]').value = '';
+            filterOptions(tipoCuentaSearch, tipoCuentaDropdown);
+        });
+    }
+
+    if (tipoMontoSearch) {
+        tipoMontoSearch.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            tipoMontoDropdown.classList.remove('hidden');
+        });
+
+        tipoMontoSearch.addEventListener('input', () => {
+            tipoMontoDropdown.classList.remove('hidden');
+            filterOptions(tipoMontoSearch, tipoMontoDropdown);
+        });
+    }
+
+    if (toggleTipoMontoDropdown) {
+        toggleTipoMontoDropdown.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleDropdownVisibility(tipoMontoDropdown, tipoMontoSearch, clearTipoMontoSearch);
+        });
+    }
+
+    if (clearTipoMontoSearch) {
+        clearTipoMontoSearch.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            tipoMontoSearch.value = '';
+            form.querySelector('input[name="tipo_monto"]').value = '';
+            filterOptions(tipoMontoSearch, tipoMontoDropdown);
+        });
+    }
+
+    const tipoCuentaOptions = document.querySelectorAll('#tipoCuentaDropdown li');
+    
+    tipoCuentaOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            selectOption(option, tipoCuentaSearch, tipoCuentaDropdown, form.querySelector('input[name="tipo_cuenta"]'));
+        });
+    });
+
+    const tipoMontoOptions = document.querySelectorAll('#tipoMontoDropdown li');
+    
+    tipoMontoOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            selectOption(option, tipoMontoSearch, tipoMontoDropdown, form.querySelector('input[name="tipo_monto"]'));
+        });
+    });
+
+    if (glosaTextarea) {
+        glosaTextarea.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            glosaCount.textContent = currentLength;
+            
+            if (currentLength >= 100) {
+                maxLengthMessage.classList.remove('hidden');
+            } else {
+                maxLengthMessage.classList.add('hidden');
+            }
+        });
+    }
+
+    const calendar = {
+        currentDate: new Date(),
+        selectedDate: null,
+
+        init() {
+            this.setupYearDropdown();
+            this.setupEventListeners();
+            this.renderCalendar();
+        },
+
+        renderCalendar() {
+            const year = this.currentDate.getFullYear();
+            const month = this.currentDate.getMonth();
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const totalDaysInMonth = lastDay.getDate();
+
+            let firstDayIndex = firstDay.getDay();
+            firstDayIndex = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+
+            const calendarDays = document.getElementById('calendarDays');
+            if (!calendarDays) {
+                return;
+            }
+
+            calendarDays.innerHTML = '';
+
+            for (let row = 0; row < 6; row++) {
+                const currentRow = document.createElement('div');
+                currentRow.className = 'flex';
+
+                for (let col = 0; col < 7; col++) {
+                    const dayPosition = row * 7 + col;
+                    const dayDiv = document.createElement('div');
+                    const button = document.createElement('button');
+                    button.type = 'button';
+
+                    let dayNumber;
+                    let isCurrentMonth = true;
+
+                    if (dayPosition < firstDayIndex) {
+                        dayNumber = prevMonthLastDay - firstDayIndex + dayPosition + 1;
+                        isCurrentMonth = false;
+                    } else if (dayPosition >= firstDayIndex + totalDaysInMonth) {
+                        dayNumber = dayPosition - firstDayIndex - totalDaysInMonth + 1;
+                        isCurrentMonth = false;
+                    } else {
+                        dayNumber = dayPosition - firstDayIndex + 1;
+                    }
+
+                    const isToday = isCurrentMonth && this.isToday(dayNumber, month, year);
+                    const isSelected = isCurrentMonth && this.isSelected(dayNumber, month, year);
+
+                    let dayClass = 'm-px size-10 flex justify-center items-center border-[1.5px] border-transparent text-sm';
+
+                    if (isCurrentMonth) {
+                        dayClass += ' text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 dark:text-neutral-200 dark:hover:border-blue-500 dark:hover:text-blue-500';
+                        if (isToday) {
+                            dayClass += ' text-blue-700 bg-blue-50';
+                        }
+                        if (isSelected) {
+                            dayClass += ' text-white bg-blue-600';
+                        }
+                    } else {
+                        dayClass += ' text-gray-400 rounded-full dark:text-neutral-500';
+                        button.disabled = true;
+                    }
+
+                    button.className = dayClass;
+                    button.textContent = dayNumber;
+
+                    if (isCurrentMonth) {
+                        button.addEventListener('click', () => {
+                            const clickedDate = new Date(year, month, dayNumber);
+                            this.handleDateSelection(clickedDate);
+                        });
+                    }
+
+                    dayDiv.appendChild(button);
+                    currentRow.appendChild(dayDiv);
+                }
+
+                calendarDays.appendChild(currentRow);
+            }
+        },
+
+        setupYearDropdown() {
+            const yearDropdown = document.getElementById('yearDropdown');
+            const yearList = yearDropdown.querySelector('ul');
+            const currentYear = this.currentDate.getFullYear();
+
+            yearList.innerHTML = '';
+
+            for (let year = currentYear - 25; year <= currentYear + 10; year++) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#';
+                a.className = 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800';
+                a.textContent = year;
+                a.dataset.value = year;
+                li.appendChild(a);
+                yearList.appendChild(li);
+            }
+
+            document.getElementById('yearDisplay').textContent = currentYear;
+
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            document.getElementById('monthDisplay').textContent = months[this.currentDate.getMonth()];
+        },
+
+        setupEventListeners() {
+            const monthLinks = document.querySelectorAll('#monthDropdown a');
+            monthLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const month = parseInt(link.dataset.value);
+                    this.currentDate.setMonth(month);
+                    document.getElementById('monthDisplay').textContent = link.textContent;
+                    this.renderCalendar();
+                });
+            });
+
+            const yearLinks = document.querySelectorAll('#yearDropdown a');
+            yearLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const year = parseInt(link.dataset.value);
+                    this.currentDate.setFullYear(year);
+                    document.getElementById('yearDisplay').textContent = year;
+                    this.renderCalendar();
+                });
+            });
+
+            const prevButton = document.getElementById('prevMonth');
+            const nextButton = document.getElementById('nextMonth');
+
+            if (prevButton) {
+                prevButton.addEventListener('click', () => {
+                    if (this.currentDate.getMonth() === 0) {
+                        this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
+                        this.currentDate.setMonth(11);
+                        document.getElementById('yearDisplay').textContent = this.currentDate.getFullYear();
+                    } else {
+                        this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+                    }
+                    const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                    document.getElementById('monthDisplay').textContent = months[this.currentDate.getMonth()];
+                    this.renderCalendar();
+                });
+            }
+
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    if (this.currentDate.getMonth() === 11) {
+                        this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
+                        this.currentDate.setMonth(0);
+                        document.getElementById('yearDisplay').textContent = this.currentDate.getFullYear();
+                    } else {
+                        this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+                    }
+                    const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                    document.getElementById('monthDisplay').textContent = months[this.currentDate.getMonth()];
+                    this.renderCalendar();
+                });
+            }
+        },
+
+        isToday(date, month, year) {
+            const today = new Date();
+            return date === today.getDate() &&
+                month === today.getMonth() &&
+                year === today.getFullYear();
+        },
+
+        isSelected(date, month, year) {
+            if (!this.selectedDate) return false;
+            return date === this.selectedDate.getDate() &&
+                month === this.selectedDate.getMonth() &&
+                year === this.selectedDate.getFullYear();
+        },
+
+        handleDateSelection(date) {
+            this.selectedDate = date;
+            this.renderCalendar();
+            this.updateFormDate();
+            
+            const calendarTitle = document.querySelector('.text-lg.font-semibold');
+            if (calendarTitle) {
+                hideError(calendarTitle, null);
+            }
+        },
+
+        updateFormDate() {
+            if (this.selectedDate) {
+                const formattedDate = this.selectedDate.toISOString().split('T')[0];
+
+                let fechaInput = form.querySelector('input[name="fecha"]');
+                if (!fechaInput) {
+                    fechaInput = document.createElement('input');
+                    fechaInput.type = 'hidden';
+                    fechaInput.name = 'fecha';
+                    form.appendChild(fechaInput);
+                }
+                fechaInput.value = formattedDate;
+            }
+        }
+    };
+
+    calendar.init();
+});
+</script>
+
+<style>
+#cuentaDropdown, #tipoCuentaDropdown, #tipoMontoDropdown {
+    position: absolute;
+    width: 100%;
+    margin-top: 0.25rem;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-height: 15rem;
+    overflow-y: auto;
+}
+
+#cuentaDropdown ul, #tipoCuentaDropdown ul, #tipoMontoDropdown ul {
+    padding: 0.5rem 0;
+}
+
+#cuentaDropdown li, #tipoCuentaDropdown li, #tipoMontoDropdown li {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: left;
+}
+
+#cuentaDropdown li:hover, #tipoCuentaDropdown li:hover, #tipoMontoDropdown li:hover {
+    background-color: #f3f4f6;
+}
+
+#cuentaDropdown li[selected], #tipoCuentaDropdown li[selected], #tipoMontoDropdown li[selected] {
+    background-color: #e5e7eb;
+}
+
+#cuentaDropdown li a, #tipoCuentaDropdown li a, #tipoMontoDropdown li a {
+    display: block;
+    color: #374151;
+    text-decoration: none;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#cuentaDropdown li a:hover, #tipoCuentaDropdown li a:hover, #tipoMontoDropdown li a:hover {
+    color: #1f2937;
+}
+
+/* Estilos para los inputs de búsqueda */
+#cuentaSearch, #tipoCuentaSearch, #tipoMontoSearch {
+    text-align: left;
+    padding-left: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Estilos para los contenedores de los inputs */
+.h-10.bg-gray-50.flex.border.border-gray-200.rounded.items-center.mt-1 {
+    justify-content: flex-start;
+}
+
+.error {
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+.error-label {
+    color: #ef4444;
+}
+</style>
+
+{% endblock %}
