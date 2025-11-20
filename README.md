@@ -6,10 +6,10 @@ A web-based accounting management system developed with **Django** for recording
 
 - **Journal Entries:** Record daily financial transactions (Asientos Contables) with support for different account types and amounts.
 - **Opening Balances:** Manage and set initial balances for specific accounts.
-- **General Journal (Libro Diario):** View a chronological record of all transactions.
-- **Income Statement (Estado de Resultados):** Automatic calculation of net income, including sales, costs, expenses, and taxes.
-- **Statement of Financial Position (Estado de Situación Financiera):** Detailed view of Assets, Liabilities, and Equity.
-- **General Ledger (Mayor):** Filter ledgers by account type or specific account codes.
+- **General Journal :** View a chronological record of all transactions.
+- **Income Statement :** Automatic calculation of net income, including sales, costs, expenses, and taxes.
+- **Statement of Financial Position:** Detailed view of Assets, Liabilities, and Equity.
+- **General Ledger :** Filter ledgers by account type or specific account codes.
 - **Responsive UI:** Built with Tailwind CSS and Flowbite for a modern, mobile-friendly interface.
 
 ## 🛠️ Tech Stack
