@@ -1,0 +1,8 @@
+services:
+  web:
+    image: anthonyjel72/financiera:latest
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./AppWeb:/app
+    ports:
+      - "8000:8000"
