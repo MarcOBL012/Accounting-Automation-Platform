@@ -34,3 +34,45 @@ Before you begin, ensure you have the following installed:
    ```bash
    git clone https://github.com/MarcOBL012/Accounting-Automation-Platform.git
    cd Accounting-Automation-Platform
+   ```
+2. **Create and activate a virtual environment**
+
+```Bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Linux/macOS
+python3 -m venv venv
+source venv/bin/activate
+```
+3. **Install dependencies**
+
+```Bash
+
+pip install -r requirements.txt
+cd AppWeb
+```
+4. **Apply database migrations**
+
+```Bash
+
+python manage.py makemigrations
+python manage.py migrate
+
+```
+5. Run the development server
+
+```Bash
+
+python manage.py runserver
+```
+6. **Access the application Open your browser and navigate to**
+```
+http://localhost:8000.
+```
+
+## 📬 Contact
+If you use or extend this project, please add a note in the README or contact:
+
+Marco Obispo — marco.obispo.l@uni.pe
